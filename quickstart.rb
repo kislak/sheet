@@ -3,7 +3,8 @@ require "googleauth"
 require "fileutils"
 require 'pry'
 
-PERMISIONS = Google::Apis::SheetsV4::AUTH_SPREADSHEETS_READONLY
+# PERMISIONS = Google::Apis::SheetsV4::AUTH_SPREADSHEETS_READONLY
+PERMISIONS = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
 CREDS_JSON = "credentials.json"
 
 authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
@@ -36,3 +37,17 @@ end
 # puts row.join("\n  ")
 
 puts "No data found." if response.values.empty?
+
+
+
+value_range_object = {
+    major_dimension: "ROWS",
+    values: [
+        ["Timestamp", "Rand"],
+        [Time.now.to_s, rand],
+    ]
+}
+
+range = "fr!E1:F2"
+
+update_res = service.update_spreadsheet_value(SOURCE, range, value_range_object, value_input_option: 'USER_ENTERED')
