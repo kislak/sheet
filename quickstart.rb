@@ -5,7 +5,7 @@ require 'pry'
 
 # PERMISIONS = Google::Apis::SheetsV4::AUTH_SPREADSHEETS_READONLY
 PERMISIONS = Google::Apis::SheetsV4::AUTH_SPREADSHEETS
-CREDS_JSON = "credentials.json"
+CREDS_JSON = "sec/google_service.json"
 
 authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
   json_key_io: File.open(CREDS_JSON),
